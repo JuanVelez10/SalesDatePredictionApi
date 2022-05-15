@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using static Domain.Enums.Enums;
 
 namespace Domain.Entities
 {
@@ -9,7 +10,7 @@ namespace Domain.Entities
         public int Empid { get; set; }
         public string Email { get; set; } = null!;
         public string Password { get; set; } = null!;
-        public int RoleType { get; set; }
+        public RoleType RoleType { get; set; }
 
         public virtual Employee Emp { get; set; } = null!;
     }

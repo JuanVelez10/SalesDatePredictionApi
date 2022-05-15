@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Domain.Entities;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -14,8 +15,8 @@ namespace Domain.Dtos
         [DataType(DataType.Text)]
         public string? Token { get; set; }
 
-        //[Required]
-        //public Account? account { get; set; }
+        [Required]
+        public Account? account { get; set; }
 
     }
 }

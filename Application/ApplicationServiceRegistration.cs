@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Application.Interfaces;
+using Application.Services;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Application
@@ -7,6 +9,10 @@ namespace Application
     {
         public static IServiceCollection AddApplicationServices(this IServiceCollection services, IConfiguration configuration)
         {
+            services
+               .AddTransient<IAccountServices, AccountServices>()
+               .AddTransient<IMessageServices, MessageServices>()
+               .AddTransient<ICustomerServices, CustomerServices>();
 
             return services;
         }
