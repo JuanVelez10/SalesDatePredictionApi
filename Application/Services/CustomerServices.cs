@@ -2,40 +2,38 @@
 using Application.Contracts.Persistence;
 using Application.Interfaces;
 using Domain.Dtos;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Utilities;
 
 namespace Application.Services
 {
     public class CustomerServices : ICustomerServices
     {
         private readonly ICustomerRepository customerRepository;
-        private readonly IMessageServices messageServices;
         private readonly IMapperService mapper;
+        private readonly IOrderServices orderServices;
 
-        public CustomerServices(ICustomerRepository customerRepository, IMessageServices messageServices, IMapperService mapper)
+        public CustomerServices(ICustomerRepository customerRepository, IMapperService mapper, IOrderServices orderServices)
         {
             this.customerRepository = customerRepository;
-            this.messageServices = messageServices;
             this.mapper = mapper;
+            this.orderServices = orderServices;
         }
 
 
-        public async Task<List<CustomerBasic>> GetAllCustomerBasic(string name)
+        public async Task<List<CustomerBasic>> GetAllCustomerBasic()
         {
-            var customers = customerRepository.GetAll();
-            if (!string.IsNullOrEmpty(name)) customers = customers.Where(x => x.Contactname.Contains(name)).ToList();
-            var customers_basic = customers.Select(x=> mapper.ConvertCustomerToCustomerBasic(x)).ToList();
+            var customers_basic = customerRepository.GetAll().Select(x => mapper.ConvertCustomerToCustomerBasic(x)).ToList();
 
-            if (customers_basic.Any())
+            if (!customers_basic.Any()) return customers_basic;
+
+            foreach (var customer_basic in customers_basic)
             {
-                foreach (var customer_basic in customers_basic)
+                var orders = await orderServices.GetOrdersForCustomerId(customer_basic.Custid);
+                if (orders.Any())
                 {
-                    //var person = personService.GetOrdesForId(customer_basic.PersonId);
-                    //if (person != null) billBasic.NameClient = person.Result.Name;
+                    var ordersDate = orders.OrderBy(x => x.Orderdate).Select(x => x.Orderdate).ToList();
+                    customer_basic.LastOrderDate = ordersDate.Last();
+                    customer_basic.NextPredictedOrderDate = Util.GetNextPredictedOrderDate(ordersDate);
                 }
             }
 

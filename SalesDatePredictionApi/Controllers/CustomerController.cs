@@ -1,4 +1,5 @@
 ﻿using Application.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -17,11 +18,12 @@ namespace Api.Controllers
             this.customerServices = customerServices;
         }
 
-        // GET: api/<ClientController>/name
+        // GET: api/<ClientController>
         [HttpGet]
-        public async Task<IActionResult> Get(string name)
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> Get()
         {
-            var result = await customerServices.GetAllCustomerBasic(name);
+            var result = await customerServices.GetAllCustomerBasic();
             if (result != null) return Ok(result);
             return NotFound(result);
         }

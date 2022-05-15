@@ -12,7 +12,8 @@ namespace Application
             services
                .AddTransient<IAccountServices, AccountServices>()
                .AddTransient<IMessageServices, MessageServices>()
-               .AddTransient<ICustomerServices, CustomerServices>();
+               .AddTransient<ICustomerServices, CustomerServices>()
+               .AddTransient<IOrderServices, OrderServices>();
 
             return services;
         }

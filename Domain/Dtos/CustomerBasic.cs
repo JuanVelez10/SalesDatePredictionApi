@@ -19,7 +19,7 @@ namespace Domain.Dtos
 
         [Required]
         [DataType(DataType.DateTime)]
-        public DateTime NextOrderDate { get; set; }
+        public DateTime NextPredictedOrderDate { get; set; }
 
     }
 }
