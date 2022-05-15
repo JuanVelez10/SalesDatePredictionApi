@@ -9,7 +9,7 @@ namespace Application.Interfaces
 {
     public interface ICustomerServices
     {
-        public List<CustomerBasic> GetAllCustomerBasic();
+        public Task<List<CustomerBasic>> GetAllCustomerBasic(string name);
 
     }
 }

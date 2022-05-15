@@ -19,10 +19,14 @@ namespace Api.Controllers
 
         // GET: api/<ClientController>/name
         [HttpGet]
-        public IEnumerable<string> Get(string name)
+        public async Task<IActionResult> Get(string name)
         {
-            return new string[] { "value1", "value2" };
+            var result = await customerServices.GetAllCustomerBasic(name);
+            if (result != null) return Ok(result);
+            return NotFound(result);
         }
+
+
 
     }
 }

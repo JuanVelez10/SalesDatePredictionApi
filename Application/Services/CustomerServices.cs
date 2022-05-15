@@ -1,4 +1,5 @@
-﻿using Application.Contracts.Persistence;
+﻿using Application.Contracts.Infrastructure;
+using Application.Contracts.Persistence;
 using Application.Interfaces;
 using Domain.Dtos;
 using System;
@@ -13,17 +14,35 @@ namespace Application.Services
     {
         private readonly ICustomerRepository customerRepository;
         private readonly IMessageServices messageServices;
+        private readonly IMapperService mapper;
 
-        public CustomerServices(ICustomerRepository accountRepository, IMessageServices messageServices)
+        public CustomerServices(ICustomerRepository customerRepository, IMessageServices messageServices, IMapperService mapper)
         {
-            this.customerRepository = accountRepository;
+            this.customerRepository = customerRepository;
             this.messageServices = messageServices;
+            this.mapper = mapper;
         }
 
 
-        public List<CustomerBasic> GetAllCustomerBasic()
+        public async Task<List<CustomerBasic>> GetAllCustomerBasic(string name)
         {
-            throw new NotImplementedException();
+            var customers = customerRepository.GetAll();
+            if (!string.IsNullOrEmpty(name)) customers = customers.Where(x => x.Contactname.Contains(name)).ToList();
+            var customers_basic = customers.Select(x=> mapper.ConvertCustomerToCustomerBasic(x)).ToList();
+
+            if (customers_basic.Any())
+            {
+                foreach (var customer_basic in customers_basic)
+                {
+                    //var person = personService.GetOrdesForId(customer_basic.PersonId);
+                    //if (person != null) billBasic.NameClient = person.Result.Name;
+                }
+            }
+
+            return customers_basic;
         }
+
+
+
     }
 }

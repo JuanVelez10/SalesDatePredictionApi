@@ -15,8 +15,10 @@ namespace Persistence
 
             services
                     .AddTransient<IAccountRepository, AccountRepository>()
-                    .AddTransient<IMessageRepository, MessageRepository>();
-
+                    .AddTransient<IMessageRepository, MessageRepository>()
+                    .AddTransient<ICustomerRepository, CustomerRepository>()
+                    .AddTransient<IOrderRepository, OrderRepository>();
+            
             return services;
         }
 

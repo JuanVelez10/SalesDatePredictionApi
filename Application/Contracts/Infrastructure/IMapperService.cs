@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Domain.Dtos;
+using Domain.Entities;
+
 
 namespace Application.Contracts.Infrastructure
 {
     public interface IMapperService
     {
-
+        public CustomerBasic ConvertCustomerToCustomerBasic(Customer customer);
     }
 }
