@@ -23,7 +23,7 @@ namespace Application.Services
         public async Task<List<CustomerBasic>> GetAllCustomerBasic(string name)
         {
             var customers_basic = customerRepository.GetAll().Select(x => mapper.ConvertCustomerToCustomerBasic(x)).ToList();
-            if (!string.IsNullOrEmpty(name)) customers_basic = customers_basic.Where(x => x.Companyname.Contains(name)).ToList();
+            if (!string.IsNullOrEmpty(name) && name != "none") customers_basic = customers_basic.Where(x => x.Companyname.ToUpper().Contains(name.ToUpper())).ToList();
             if (!customers_basic.Any()) return customers_basic;
 
             foreach (var customer_basic in customers_basic)
