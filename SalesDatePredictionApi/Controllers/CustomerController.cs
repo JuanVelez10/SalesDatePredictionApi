@@ -18,12 +18,12 @@ namespace Api.Controllers
             this.customerServices = customerServices;
         }
 
-        // GET: api/<ClientController>
-        [HttpGet]
+        // GET: api/<ClientController>/name
+        [HttpGet("{name}")]
         [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> Get()
+        public async Task<IActionResult> Get(string name)
         {
-            var result = await customerServices.GetAllCustomerBasic();
+            var result = await customerServices.GetAllCustomerBasic(name);
             if (result != null) return Ok(result);
             return NotFound(result);
         }

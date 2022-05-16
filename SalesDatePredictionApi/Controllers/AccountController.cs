@@ -54,10 +54,9 @@ namespace Api.Controllers
             if (response != null && response.Data != null)
             {
                 response.Data.Token = configExtensions.Generate(config, response.Data.account);
-                return Ok(response);
             }
 
-            return BadRequest(response);
+            return Ok(response);
         }
 
     }

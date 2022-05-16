@@ -57,6 +57,16 @@ builder.Services.AddHealthChecks().AddCheck("ping", () => {
     }
 });
 
+var cors = "cors";
+builder.Services.AddCors(op =>
+{
+    op.AddPolicy(cors, builder =>
+     {
+         builder.SetIsOriginAllowed(o => new Uri(o).Host == "localhost");
+     });
+});
+
+
 
 //Authentication Configuration
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -151,7 +161,7 @@ app.UseExceptionHandler(appError =>
     });
 });
 
-
+app.UseCors(cors);
 app.UseHttpsRedirection();
 app.UseRouting();
 app.UseAuthentication();
