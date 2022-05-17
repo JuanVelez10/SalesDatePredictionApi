@@ -19,8 +19,10 @@ namespace Persistence
                     .AddTransient<ICustomerRepository, CustomerRepository>()
                     .AddTransient<IOrderRepository, OrderRepository>()
                     .AddTransient<IOrderDetailRepository, OrderDetailRepository>()
-                    .AddTransient<IProductRepository, ProductRepository>();
-            
+                    .AddTransient<IProductRepository, ProductRepository>()
+                    .AddTransient<IEmployeeRepository, EmployeeRepository>()
+                    .AddTransient<IShipperRepository, ShipperRepository>();
+             
             return services;
         }
 

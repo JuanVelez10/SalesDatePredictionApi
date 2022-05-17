@@ -15,8 +15,10 @@ namespace Application
                .AddTransient<ICustomerServices, CustomerServices>()
                .AddTransient<IOrderServices, OrderServices>()
                .AddTransient<IOrderDetailServices, OrderDetailServices>()
-               .AddTransient<IProductServices, ProductServices>();
-            
+               .AddTransient<IProductServices, ProductServices>()
+               .AddTransient<IEmployeeServices, EmployeeServices>()
+               .AddTransient<IShipperServices, ShipperServices>();
+             
             return services;
         }
 

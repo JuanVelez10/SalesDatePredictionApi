@@ -10,6 +10,7 @@ namespace Application.Contracts.Persistence
     public interface IOrderRepository
     {
         public List<Order> GetOrdersForCustomerId(int Custid);
+        public bool Insert(Order order);
     }
 
 }

@@ -8,7 +8,6 @@ namespace Domain.Entities
         public Employee()
         {
             Accounts = new HashSet<Account>();
-            InverseMgr = new HashSet<Employee>();
             Orders = new HashSet<Order>();
         }
 
@@ -29,7 +28,6 @@ namespace Domain.Entities
 
         public virtual Employee? Mgr { get; set; }
         public virtual ICollection<Account> Accounts { get; set; }
-        public virtual ICollection<Employee> InverseMgr { get; set; }
         public virtual ICollection<Order> Orders { get; set; }
     }
 }

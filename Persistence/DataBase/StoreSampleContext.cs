@@ -202,10 +202,6 @@ namespace Domain.Persistence.DataBase
                     .HasMaxLength(25)
                     .HasColumnName("titleofcourtesy");
 
-                entity.HasOne(d => d.Mgr)
-                    .WithMany(p => p.InverseMgr)
-                    .HasForeignKey(d => d.Mgrid)
-                    .HasConstraintName("FK_Employees_Employees");
             });
 
             modelBuilder.Entity<Message>(entity =>
