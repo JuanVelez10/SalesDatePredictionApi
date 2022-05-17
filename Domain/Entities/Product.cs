@@ -5,10 +5,6 @@ namespace Domain.Entities
 {
     public partial class Product
     {
-        public Product()
-        {
-            OrderDetails = new HashSet<OrderDetail>();
-        }
 
         public int Productid { get; set; }
         public string Productname { get; set; } = null!;
@@ -19,6 +15,5 @@ namespace Domain.Entities
 
         public virtual Category Category { get; set; } = null!;
         public virtual Supplier Supplier { get; set; } = null!;
-        public virtual ICollection<OrderDetail> OrderDetails { get; set; }
     }
 }

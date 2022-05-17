@@ -20,5 +20,6 @@ namespace Infrastructure.Services.Mapper
             return mapper.Map<CustomerBasic>(customer);
         }
 
+
     }
 }

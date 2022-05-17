@@ -328,17 +328,6 @@ namespace Domain.Persistence.DataBase
                     .HasColumnType("money")
                     .HasColumnName("unitprice");
 
-                entity.HasOne(d => d.Order)
-                    .WithMany(p => p.OrderDetails)
-                    .HasForeignKey(d => d.Orderid)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_OrderDetails_Orders");
-
-                entity.HasOne(d => d.Product)
-                    .WithMany(p => p.OrderDetails)
-                    .HasForeignKey(d => d.Productid)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_OrderDetails_Products");
             });
 
             modelBuilder.Entity<OrderTotalsByYear>(entity =>

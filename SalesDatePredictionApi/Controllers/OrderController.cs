@@ -21,7 +21,7 @@ namespace Api.Controllers
         [HttpGet("Customer/{id}")]
         public async Task<IActionResult> Get(int id)
         {
-            var result = await orderServices.GetOrdersForCustomerId(id);
+            var result = await orderServices.GetOrdersForCustomerId(id,true);
             if (result != null) return Ok(result);
             return NotFound(result);
         }

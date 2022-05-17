@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace Application.Interfaces
 {
-    public interface IOrderServices
+    public interface IOrderDetailServices
     {
-        public Task<List<Order>> GetOrdersForCustomerId(int Custid, bool withDetails=false);
+        public Task<List<OrderDetail>> GetOrdersForOrderId(int id);
     }
 }

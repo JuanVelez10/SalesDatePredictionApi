@@ -11,7 +11,6 @@ namespace Domain.Entities
         public short Qty { get; set; }
         public decimal Discount { get; set; }
 
-        public virtual Order Order { get; set; } = null!;
         public virtual Product Product { get; set; } = null!;
     }
 }
