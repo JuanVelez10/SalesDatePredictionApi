@@ -1,0 +1,12 @@
+Code First
+ Initial:
+	Add-Migration InitialCreate
+	Update-Database
+ Update: 
+	Add-Migration
+	StoreSample
+	Update-Database
+
+
+Data First
+Scaffold-DbContext "Server=VALEMAS-327\SQLEXPRESS; Database=StoreSample; Trusted_Connection=True;" Microsoft.EntityFrameworkCore.SqlServer  -ContextDir Persistence.DataBase -Project "Domain" -OutputDir Entities -force 
